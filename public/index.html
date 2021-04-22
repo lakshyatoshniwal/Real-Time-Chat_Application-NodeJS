@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+			integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk="
+			crossorigin="anonymous"
+	/>
+    <link rel="stylesheet" href="css/style.css">
+    <title>GAPSHAP</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>GAPSHAP  <i class="fas fa-smile"></i></h1>
+        </header>
+        <main class="main">
+            <form action="chat.html">
+                <div class="form-field">
+                    <label for="username">Username: </label>
+                    <input type="text" name="name" id="name" placeholder="Enter username..." required>
+                </div>
+                <div class="form-field">
+                    <label for="chatroom">Room</label>
+                    <select name="chatroom" id="chatroom" required="required">
+                        <option value="">&lt;--Choose Room--&gt;</option>  
+                        <option value="RCB">RCB</option>
+                        <option value="CSK">CSK</option>
+                        <option value="MI">MI</option>
+                        <option value="DC">DC</option>
+                        <option value="PBKS">PBKS</option>
+                        <option value="SRH">SRH</option>
+                        <option value="RR">RR</option>
+                        <option value="KKR">KKR</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Join Chat</buttont>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
