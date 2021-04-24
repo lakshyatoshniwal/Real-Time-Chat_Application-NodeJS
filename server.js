@@ -31,14 +31,20 @@ io.on('connection', (socket) => {
     socket.join(user.chatroom)
 
     //Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to Gapshap...'))
+    socket.emit(
+      'messageWelcome',
+      formatMessage(user.name, 'Welcome to Gapshap...')
+    )
 
     //Braoadcast when a user connect
     socket.broadcast
       .to(user.chatroom)
       .emit(
-        'message',
-        formatMessage(botName, `${user.name} has joined the chat`)
+        'messageConnection',
+        formatMessage(
+          botName,
+          `<span>${user.name}&nbsp;&nbsp;</span>has joined the chat`
+        )
       )
 
     //Send users and room info
@@ -51,7 +57,11 @@ io.on('connection', (socket) => {
   //Listen for chatMessage
   socket.on('chatMessage', (msg) => {
     const user = getCurrentUser(socket.id)
-    io.to(user.chatroom).emit('message', formatMessage(user.name, msg))
+    socket.broadcast
+      .to(user.chatroom)
+      .emit('message', formatMessage(user.name, msg))
+
+    socket.emit('messageRight', formatMessage('You', msg))
   })
 
   //Runs when client disconnect
@@ -59,8 +69,11 @@ io.on('connection', (socket) => {
     const user = userLeave(socket.id)
     if (user) {
       io.to(user.chatroom).emit(
-        'message',
-        formatMessage(botName, `${user.name} has left the chat`)
+        'messageConnection',
+        formatMessage(
+          botName,
+          `<span>${user.name}&nbsp;&nbsp;</span>has left the chat`
+        )
       )
       //Send users and room info
       io.to(user.chatroom).emit('roomUser', {
